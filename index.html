@@ -33,10 +33,10 @@
     <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5f101424c141ce53e3ed5e26f10ca225&libraries=services"></script>
     <script>
     var overlayOn = false, // 지도 위에 로드뷰 오버레이가 추가된 상태를 가지고 있을 변수
-    var container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
-    var mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
-    var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div 입니다
-    var mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
+    mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
+    rvContainer = document.getElementById('roadview'), //로드뷰를 표시할 div 입니다
+    mapContainer = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
       var options = { //지도를 생성할 때 필요한 기본 옵션
       	center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
       	level: 3 //지도의 레벨(확대, 축소 정도)
