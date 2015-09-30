@@ -447,9 +447,7 @@
 						for (var j = 0; j < maps.length; j++) {
 							var map = maps[j];
 							if (code.seq == map.mapCodeSeq) {
-								office_tree.append(i, {
-									title : map.name
-								},map);
+								office_tree.append(i,map);
 							}
 						}
 						office_tree.fold(i);
