@@ -422,8 +422,8 @@
 							var map = maps[j];
 							if (code.seq == map.mapCodeSeq) {
 								office_tree.append(i,map);
+								crateMarker(map.lat,map.lng,code.imgpath);
 							}
-							crateMarker(map.lat,map.lng,map.imgpath);
 						}
 						office_tree.fold(i);
 					}
