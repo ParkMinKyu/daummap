@@ -20,6 +20,7 @@
   </head>
   <body>
     <div id="container">
+      <input type="text" id="addr"/><button id="addrBtn" onclick="getLngLat();return false;">좌표가져오기</button>
     <div id="rvWrapper">
         <div id="roadview" style="width:100%;height:100%;"></div> <!-- 로드뷰를 표시할 div 입니다 -->
         <div id="close" title="로드뷰닫기" onclick="closeRoadview()"><span class="img"></span></div>
@@ -214,6 +215,33 @@ map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 var zoomControl = new daum.maps.ZoomControl();
 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+function getLngLat(){
+  var geocoder = new daum.maps.services.Geocoder();
+  var addr = document.getElementById('addr');
+  // 주소로 좌표를 검색합니다
+geocoder.addr2coord(addr.value, function(status, result) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="padding:5px;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
+    } 
+});
+}
+
     </script>
   </body>
 </html>
