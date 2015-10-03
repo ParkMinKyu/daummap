@@ -176,7 +176,7 @@ jui.ready([ "uix.window" ], function(win) {
 			for (var j = 0; j < mapList.length; j++) {
 			    var map = mapList[j];
 			    office_tree.append(i, map);
-				crateMarker(map.lat, map.lng, mapCode.imgpath);
+				crateMarker(map.lat, map.lng, mapCode.imgpath,true);
 			}
 			office_tree.fold(i);
 		    }
@@ -198,6 +198,7 @@ jui.ready([ "uix.window" ], function(win) {
 		mapInfo.hide();
 		var officeInfo = office_tree.get(office_tree.activeIndex()).data;
 		panTo(officeInfo.lat,officeInfo.lng);
+		crateMarker(map.lat, map.lng, mapCode.imgpath,false);
 	}
 </script>
 </body>
