@@ -2,124 +2,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<style type="text/css">
-.info {position:relative;top:5px;left:5px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;font-size:12px;padding:5px;background:#fff;list-style:none;margin:0;} 
-.info:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
-.number {font-weight:bold;color:#00a0e9;} 
-.wrap-loading { /*화면 전체를 어둡게 합니다.*/
-	position: fixed;
-	z-index: 999999;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	background: rgba(0, 0, 0, 0.2); /*not in ie */
-	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000',
-		endColorstr='#20000000'); /* ie */
-}
-
-.wrap-loading div { /*로딩 이미지*/
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin-left: -21px;
-	margin-top: -21px;
-}
-
-.display-none { /*감추기*/
-	display: none;
-}
-
-#container {
-	overflow: hidden;
-	height: 600px;
-	position: relative;
-}
-
-#mapWrapper {
-	width: 100%;
-	height: 600px;
-	z-index: 1;
-}
-
-#rvWrapper {
-	width: 50%;
-	height: 600px;
-	top: 0;
-	right: 0;
-	position: absolute;
-	z-index: 0;
-}
-
-#container.view_roadview #mapWrapper {
-	width: 50%;
-}
-
-#roadviewControl {
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 65px;
-	height: 24px;
-	padding: 2px;
-	z-index: 1;
-	background: #f7f7f7;
-	border-radius: 4px;
-	border: 1px solid #c8c8c8;
-	box-shadow: 0px 1px #888;
-	cursor: pointer;
-}
-
-#roadviewControl span {
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/mapworker.png)
-		no-repeat;
-	padding-left: 23px;
-	height: 24px;
-	font-size: 12px;
-	display: inline-block;
-	line-height: 2;
-	font-weight: bold;
-}
-
-#roadviewControl.active {
-	background: #ccc;
-	box-shadow: 0px 1px #5F616D;
-	border: 1px solid #7F818A;
-}
-
-#roadviewControl.active span {
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/mapworker_on.png)
-		no-repeat;
-	color: #4C4E57;
-}
-
-#close {
-	position: absolute;
-	padding: 4px;
-	top: 5px;
-	left: 5px;
-	cursor: pointer;
-	background: #fff;
-	border-radius: 4px;
-	border: 1px solid #c8c8c8;
-	box-shadow: 0px 1px #888;
-}
-
-#close .img {
-	display: block;
-	background:
-		url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/rv_close.png)
-		no-repeat;
-	width: 14px;
-	height: 14px;
-}
-</style>
+<link rel="stylesheet" href="/daummap/css/map.css" />
+<link rel="stylesheet"
+	href="/daummap/css/jquery.simplebanner.css" />
 <link rel="stylesheet" href="/daummap/js/jui/dist/jui.min.css" />
 <link rel="stylesheet"
 	href="/daummap/js/jui/dist/jennifer.theme.min.css" />
 <script type="text/javascript" src="/daummap/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript"	src="/daummap/js/jquery.simplebanner.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/dist/jui.min.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/base.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/core.js"></script>
@@ -130,7 +20,7 @@
 	src="//apis.daum.net/maps/maps3.js?apikey=5f101424c141ce53e3ed5e26f10ca225&libraries=services"></script>
 <title>수원 서부 경찰서 EM</title>
 </head>
-<body class="jui">
+<body class="jui" style="height: 630px;">
 	<!-- 로딩이미지 레이어 -->
 	<div class="wrap-loading display-none">
 		<div>
@@ -145,47 +35,49 @@
 	</ul>
 	<!-- Main panel -->
 	<div class="panel">
-		<div class="head">수원 서부 경찰서 EM</div>
+		<div class="head">
+			<div class="left">수원 서부 경찰서 EM</div>
+			<div class="right" style="position: absolute; right: 3px; top: 0px;">
+				<a href="#" class="btn">모든 Marker 삭제 <i class="icon-trashcan"></i></a>
+				<a href="#" class="btn">모든 Marker 배치 <i class="icon-refresh"></i></a>
+			</div>
+		</div>
 		<div class="body">
 			<div class="row">
-				<div class="col col-2">
+				<div class="col col-2" style="max-height: 630px; overflow: auto;">
 					<ul class="tree line-file"></ul>
 				</div>
 				<div class="col col-10">
-					<div id="container">
-						<div id="rvWrapper">
-							<div id="roadview" style="width: 100%; height: 100%;"></div>
-							<!-- 로드뷰를 표시할 div 입니다 -->
-							<div id="close" title="로드뷰닫기" onclick="closeRoadview()">
-								<span class="img"></span>
-							</div>
-						</div>
-						<div id="mapWrapper">
-							<div id="map" style="width: 100%; height: 100%"></div>
-							<!-- 지도를 표시할 div 입니다 -->
-							<div id="roadviewControl" onclick="setRoadviewRoad()">
-								<span>로드뷰</span>
-							</div>
-						</div>
-					</div>
-					<input type="text" id="addr" />
-					<button id="addrBtn" onclick="getLngLat();return false;">좌표가져오기</button>
+					<div id="map" style="width: 100%; height: 100%;"></div>
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- 시설정보 window -->
 		<div id="mapInfo" class="window">
-			<div class="head">
-				<div class="left">맵이름</div>
-				<div class="right">
-					<a href="#"><i class="icon-search"></i></a> <a href="#"
-						class="close"><i class="icon-exit"></i></a>
-				</div>
+		<div class="head">
+			<div class="left">
+				<span id="mapName"></span>
 			</div>
-			<div class="body">
-				Contents...<br />
+			<div class="right">
+				<a href="#"><i class="icon-search"></i></a> <a href="#"
+					class="close"><i class="icon-exit"></i></a>
 			</div>
 		</div>
+		<div class="body">
+			<div>
+				<span class="label">주소</span><span id="mapAddr"></span>
+			</div>
+			<div>
+				<span class="label">전화번호</span><span id="mapPhon"></span>
+			</div>
+			<div>
+				<span class="label">CCTV정보</span><span id="mapCctv"></span>
+			</div>
+			<div id="cctvList"></div>
+		</div>
+	</div>
+
 
 		<script id="tpl_node" type="text/template">
     <li>
@@ -418,50 +310,43 @@ var drawingDot; // 그려지고 있는 원의 중심점을 표시할 커스텀�
 
 var circles = []; // 클릭으로 그려진 원과 반경 정보를 표시하는 선과 커스텀오버레이를 가지고 있을 배열입니다
 
-// 지도에 클릭 이벤트를 등록합니다
-daum.maps.event.addListener(map, 'click', function(mouseEvent) {
-        
-    // 클릭 이벤트가 발생했을 때 원을 그리고 있는 상태가 아니면 중심좌표를 클릭한 지점으로 설정합니다
-    if (!drawingFlag) {    
-        
-        // 상태를 그리고있는 상태로 변경합니다
-        drawingFlag = true; 
-        
-        // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다 
-        centerPosition = mouseEvent.latLng; 
+function createCircles(mouseEvent){
+    drawingFlag = true; 
+    
+    // 원이 그려질 중심좌표를 클릭한 위치로 설정합니다 
+    centerPosition = mouseEvent.latLng; 
 
-        // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
-        if (!drawingLine) {
-            drawingLine = new daum.maps.Polyline({
-                strokeWeight: 3, // 선의 두께입니다
-                strokeColor: '#00a0e9', // 선의 색깔입니다
-                strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                strokeStyle: 'solid' // 선의 스타일입니다
-            });    
-        }
-        
-        // 그려지고 있는 원을 표시할 원 객체를 생성합니다
-        if (!drawingCircle) {                    
-            drawingCircle = new daum.maps.Circle({ 
-                strokeWeight: 1, // 선의 두께입니다
-                strokeColor: '#00a0e9', // 선의 색깔입니다
-                strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-                strokeStyle: 'solid', // 선의 스타일입니다
-                fillColor: '#00a0e9', // 채우기 색깔입니다
-                fillOpacity: 0.2 // 채우기 불투명도입니다 
-            });     
-        }
-        
-        // 그려지고 있는 원의 반경 정보를 표시할 커스텀오버레이를 생성합니다
-        if (!drawingOverlay) {
-            drawingOverlay = new daum.maps.CustomOverlay({
-                xAnchor: 0,
-                yAnchor: 0,
-                zIndex: 1
-            });              
-        }
+    // 그려지고 있는 원의 반경을 표시할 선 객체를 생성합니다
+    if (!drawingLine) {
+        drawingLine = new daum.maps.Polyline({
+            strokeWeight: 3, // 선의 두께입니다
+            strokeColor: '#00a0e9', // 선의 색깔입니다
+            strokeOpacity: 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid' // 선의 스타일입니다
+        });    
     }
-    });
+    
+    // 그려지고 있는 원을 표시할 원 객체를 생성합니다
+    if (!drawingCircle) {                    
+        drawingCircle = new daum.maps.Circle({ 
+            strokeWeight: 1, // 선의 두께입니다
+            strokeColor: '#00a0e9', // 선의 색깔입니다
+            strokeOpacity: 0.1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+            fillColor: '#00a0e9', // 채우기 색깔입니다
+            fillOpacity: 0.2 // 채우기 불투명도입니다 
+        });     
+    }
+    
+    // 그려지고 있는 원의 반경 정보를 표시할 커스텀오버레이를 생성합니다
+    if (!drawingOverlay) {
+        drawingOverlay = new daum.maps.CustomOverlay({
+            xAnchor: 0,
+            yAnchor: 0,
+            zIndex: 1
+        });              
+    }	
+}
 
 // 지도에 마우스무브 이벤트를 등록합니다
 // 원을 그리고있는 상태에서 마우스무브 이벤트가 발생하면 그려질 원의 위치와 반경정보를 동적으로 보여주도록 합니다
@@ -677,63 +562,96 @@ function getTimeHTML(distance) {
 		</script>
 
 		<script type="text/javascript">
-			jui.ready([ "uix.window" ], function(win) {
-				mapInfo = win("#mapInfo", {
-					width : 500,
-					height : 300,
-					modal : true
-				});
-			});
-			jui.ready([ "uix.tree" ], function(tree) {
-				office_tree = tree(".tree", {
-					root : {
-						title : "시설정보"
-					},
-					event : {
-						select : function(node) {
-							/* this.select(node.index);
-							alert("index(" + node.index + "), title("
-									+ node.data.title + ")"); */
-							if (node.depth > 1) {
-								mapInfo.show();
-							}
-						}
-					},
-					tpl : {
-						node : $("#tpl_node").html()
-					}
-				});
-			});
-			$.ajax({
-				url : "/daummap/mapCodeList.json",
-				beforeSend : function() {
-					$('.wrap-loading').removeClass('display-none');
-				},
-				success : function(datas) {
-					var codes = datas.mapCodeList;
-					var maps = datas.mapList;
-					for (var i = 0; i < codes.length; i++) {
-						var code = codes[i];
-						office_tree.append(code);
-						for (var j = 0; j < maps.length; j++) {
-							var map = maps[j];
-							if (code.seq == map.mapCodeSeq) {
-								office_tree.append(i, map);
-								crateMarker(map.lat, map.lng, code.imgpath);
-							}
-						}
-						office_tree.fold(i);
-					}
-					$('.wrap-loading').addClass('display-none');
-				},
-				error : function(r, e, o) {
-					alert('mapCodeList.do 수행중 에러');
-					$('.wrap-loading').addClass('display-none');
-					console.log(r);
-					console.log(e);
-					console.log(o);
+jui.ready([ "uix.window" ], function(win) {
+	    mapInfo = win("#mapInfo", {
+		width : 600,
+		height : 550,
+		modal : true
+	    });
+	});
+	jui.ready([ "uix.tree" ], function(tree) {
+	    office_tree = tree(".tree", {
+		root : {
+		    name : "시설정보"
+		},
+		event : {
+		    select : function(node) {
+			/* this.select(node.index);
+			alert("index(" + node.index + "), title("
+					+ node.data.title + ")"); */
+			if (node.depth > 1) {
+			    $('#mapName').text(node.data.name);
+			    $('#mapAddr').text(node.data.addr);
+			    $('#mapPhon').text(node.data.phon);
+			    $('#cctvList').html('');
+			    var cctvList = node.data.cctvList;
+			    if (cctvList.length > 0) {
+				var html = '<div id="siteWpr">';
+				html += '<div class="simpleBanner">';
+				html += '<div class="bannerListWpr">';
+				html += '<ul class="bannerList">';
+				for (var i = 0; i < cctvList.length; i++) {
+				    var cctv = cctvList[i];
+				    html += '<li><img src="<c:url value='/'/>' + cctv.imgpath + '" ></li>';
 				}
-			});
+				html += '</ul>';
+				html += '</div>';
+				html += '<div class="bannerControlsWpr bannerControlsPrev"><div class="bannerControls"></div></div>';
+				html += '<div class="bannerIndicators"><ul></ul></div>';
+				html += '<div class="bannerControlsWpr bannerControlsNext"><div class="bannerControls"></div></div>';
+				html += '</div>';
+				html += '</div>';
+				$('#cctvList').html(html);
+				$('.simpleBanner').simplebanner({
+				    autoRotate : false
+				});
+				$('#cctvList').show();
+			    } else {
+				$('#mapCctv').text("CCTV 정보 없음.");
+				$('#cctvList').hide();
+			    }
+			    mapInfo.show();
+			}
+		    }
+		},
+		tpl : {
+		    node : $("#tpl_node").html()
+		}
+	    });
+	   getMapInfoList();
+	});
+
+	function getMapInfoList() {
+	    $.ajax({
+		url : "<c:url value="/mapCodeList.do"/>",
+		cache : false,
+		beforeSend : function() {
+		    $('.wrap-loading').removeClass('display-none');
+		},
+		success : function(datas) {
+		    var mapInfoList = datas.mapInfoList;
+		    for (var i = 0; i < mapInfoList.length; i++) {
+			var mapCode = mapInfoList[i];
+			var mapList = mapCode.mapList;
+			office_tree.append(mapCode);
+			for (var j = 0; j < mapList.length; j++) {
+			    var map = mapList[j];
+			    office_tree.append(i, map);
+			}
+			office_tree.fold(i);
+		    }
+		},
+		error : function(r, e, o) {
+		    alert('mapCodeList.do 수행중 에러');
+		    console.log(r);
+		    console.log(e);
+		    console.log(o);
+		},
+		complete : function() {
+		    $('.wrap-loading').addClass('display-none');
+		}
+	    });
+	}
 		</script>
 </body>
 </html>
