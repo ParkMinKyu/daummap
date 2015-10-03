@@ -161,7 +161,7 @@ jui.ready([ "uix.window" ], function(win) {
 
 	function getMapInfoList() {
 	    $.ajax({
-		url : "/daummap/mapCodeList.do",
+		url : "/daummap/mapCodeList.json",
 		cache : false,
 		beforeSend : function() {
 		    $('.wrap-loading').removeClass('display-none');
