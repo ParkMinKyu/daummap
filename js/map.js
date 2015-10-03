@@ -404,6 +404,9 @@ function getTimeHTML(distance) {
 	return content;
 }
 
+// 지도에 표시된 마커 객체를 가지고 있을 배열입니다
+var markers = [];
+
 function crateMarker(lat, lng, imgpath) {
 	var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 	imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
@@ -423,4 +426,23 @@ function crateMarker(lat, lng, imgpath) {
 	});
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+	
+	markers.push(marker);
+}
+
+// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+function setMarkers(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }            
+}
+
+// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
+function showMarkers() {
+    setMarkers(map)    
+}
+
+// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
+function hideMarkers() {
+    setMarkers(null);    
 }
