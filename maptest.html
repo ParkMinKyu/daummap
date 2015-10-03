@@ -617,9 +617,9 @@ function getTimeHTML(distance) {
 							alert("index(" + node.index + "), title("
 									+ node.data.title + ")"); */
 							if (node.depth > 1) {
-								$('#mapName').val(node.data.name);
-								$('#mapAddr').val(node.data.addr);
-								$('#mapPhon').val(node.data.Phon);
+								$('#mapName').text(node.data.name);
+								$('#mapAddr').text(node.data.addr);
+								$('#mapPhon').text(node.data.Phon);
 								mapInfo.show();
 							}
 						}
