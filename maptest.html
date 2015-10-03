@@ -164,14 +164,16 @@
 		<!-- 시설정보 window -->
 		<div id="mapInfo" class="window">
 			<div class="head">
-				<div class="left">맵이름</div>
+				<div class="left"><span id="mapName"></span></div>
 				<div class="right">
 					<a href="#"><i class="icon-search"></i></a> <a href="#"
 						class="close"><i class="icon-exit"></i></a>
 				</div>
 			</div>
 			<div class="body">
-				Contents...<br />
+				<span id="mapAddr"></span>
+				<span id="mapPhon"></span>
+				<span id="mapCctv"></span>
 			</div>
 		</div>
 
@@ -615,6 +617,9 @@ function getTimeHTML(distance) {
 							alert("index(" + node.index + "), title("
 									+ node.data.title + ")"); */
 							if (node.depth > 1) {
+								$('#mapName').val(node.data.name);
+								$('#mapAddr').val(node.data.addr);
+								$('#mapPhon').val(node.data.Phon);
 								mapInfo.show();
 							}
 						}
