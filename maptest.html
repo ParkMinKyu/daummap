@@ -194,6 +194,7 @@ jui.ready([ "uix.window" ], function(win) {
 	}
 	
 	function goOfficeMap(){
+		hideMarkers();
 		mapInfo.hide();
 		var officeInfo = office_tree.get(office_tree.activeIndex()).data;
 		panTo(officeInfo.lat,officeInfo.lng);
