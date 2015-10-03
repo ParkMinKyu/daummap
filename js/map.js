@@ -405,7 +405,7 @@ function getTimeHTML(distance) {
 }
 
 function crateMarker(lat, lng, imgpath) {
-	var imageSrc = imgpath, // 마커이미지의 주소입니다
+	var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 	imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
 	imageOption = {
 		offset : new daum.maps.Point(10, 40)
