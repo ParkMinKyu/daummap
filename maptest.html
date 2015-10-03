@@ -46,7 +46,22 @@
 					<ul class="tree line-file"></ul>
 				</div>
 				<div class="col col-10">
-					<div id="map" style="width: 100%; height: 100%;"></div>
+					<div id="container">
+						<div id="rvWrapper">
+							<div id="roadview" style="width: 100%; height: 100%;"></div>
+							<!-- 로드뷰를 표시할 div 입니다 -->
+							<div id="close" title="로드뷰닫기" onclick="closeRoadview()">
+								<span class="img"></span>
+							</div>
+						</div>
+						<div id="mapWrapper">
+							<div id="map" style="width: 100%; height: 100%"></div>
+							<!-- 지도를 표시할 div 입니다 -->
+							<div id="roadviewControl" onclick="setRoadviewRoad()">
+								<span>로드뷰</span>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
