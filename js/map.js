@@ -407,7 +407,7 @@ function getTimeHTML(distance) {
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 var markers = [];
 
-function crateMarker(lat, lng, imgpath) {
+function crateMarker(lat, lng, imgpath, isPush) {
 	var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 	imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
 	imageOption = {
@@ -426,8 +426,8 @@ function crateMarker(lat, lng, imgpath) {
 	});
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
-	
-	markers.push(marker);
+	if(isPush)
+		markers.push(marker);
 }
 
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
