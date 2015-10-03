@@ -73,7 +73,7 @@
 				<span id="mapName"></span>
 			</div>
 			<div class="right">
-				<a href="javascript:panTo(office_tree.activeIndex()).data.lat,office_tree.get(office_tree.activeIndex()).data.lng);return false;"><i class="icon-search"></i></a> <a href="#"
+				<a href="javascript:goOfficeMap();return false;"><i class="icon-search"></i></a> <a href="#"
 					class="close"><i class="icon-exit"></i></a>
 			</div>
 		</div>
@@ -191,6 +191,12 @@ jui.ready([ "uix.window" ], function(win) {
 		    $('.wrap-loading').addClass('display-none');
 		}
 	    });
+	}
+	
+	function goOfficeMap(){
+		mapInfo.hide();
+		var officeInfo = office_tree.get(office_tree.activeIndex()).data;
+		panTo(officeInfo.lat,officeInfo.lng);
 	}
 </script>
 </body>
