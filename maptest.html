@@ -175,6 +175,7 @@ jui.ready([ "uix.window" ], function(win) {
 			for (var j = 0; j < mapList.length; j++) {
 			    var map = mapList[j];
 			    office_tree.append(i, map);
+				crateMarker(map.lat, map.lng, mapCode.imgpath);
 			}
 			office_tree.fold(i);
 		    }
