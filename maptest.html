@@ -196,9 +196,9 @@ jui.ready([ "uix.window" ], function(win) {
 	function goOfficeMap(){
 		hideMarkers();
 		mapInfo.hide();
-		var officeInfo = office_tree.get(office_tree.activeIndex()).data;
-		panTo(officeInfo.lat,officeInfo.lng);
-		crateMarker(map.lat, map.lng, mapCode.imgpath,false);
+		var map = office_tree.get(office_tree.activeIndex()).data;
+		panTo(map.lat,map.lng);
+		crateMarker(map.lat, map.lng, map.parent.data.imgpath,false);
 	}
 </script>
 </body>
