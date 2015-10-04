@@ -160,7 +160,7 @@ var mapInfoList = [];
 		var html = '';
 	    for (var i = 0; i < mapList.length; i++) {
 			var map = mapList[i];
-		    html += '<a class="btn mini"> '+map.name+' <i class="icon-check"></i></a>';
+		   html += '<a class="btn mini" onclick="codeMapList.setIndex('+i+'); return false;"> '+map.name+' <i class="icon-check"></i></a>';
 		}
 	    $('#codeMapList').html(html);
 	    codeMapList.reload();
@@ -226,7 +226,7 @@ var mapInfoList = [];
 		    var html = '';
 		    for (var i = 0; i < mapInfoList.length; i++) {
 				var mapCode = mapInfoList[i];
-				html += '<a class="btn">' + mapCode.name + ' <i class="icon-check"></i></a>';
+				html += '<a class="btn" onclick="mapCodeGroup.setIndex('+i+'); return false;">' + mapCode.name + ' <i class="icon-check"></i></a>';
 				for (var j = 0; j < mapList.length; j++) {
 		        var map = mapList[j];
 		        
