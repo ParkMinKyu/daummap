@@ -559,7 +559,7 @@ function addMarkerEvent(){
 							$('#mapCctv').text("CCTV 정보 없음.");
 							$('#cctvList').hide();
 							}
-							mapInfo.show();
+							mapInfoWindow.show();
 					});
 				}
 			}
