@@ -477,7 +477,36 @@ function setMarkers(map) {
 
 // "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 function showMarkers() {
-    setMarkers(map)    
+   hideMarkers();
+   for(var i = 0 ; i < mapInfoList.length ; i ++){
+	   var code = mapInfoList[i];
+	   var mapList = code.mapList;	               
+	   	if(markers[i] == null )markers[i] = new Array();
+		for(var j = 0 ; j < mapList.length ; j ++){
+			if(markers[i][j] == null || markers[i][j].mf == null){
+				var mapInfo = mapList[j];
+				var imageSrc = '/daummap'+code.imgpath, // 마커이미지의 주소입니다
+				imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
+				imageOption = {
+					offset : new daum.maps.Point(10, 40)
+				}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+				var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
+						imageOption), markerPosition = new daum.maps.LatLng(mapInfo.lat, mapInfo.lng); // 마커가
+																						// 표시될
+																						// 위치입니다
+				// 마커를 생성합니다
+				var marker = new daum.maps.Marker({
+					position : markerPosition,
+					image : markerImage
+				// 마커이미지 설정
+				});
+				// 마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+				markers[i][j] = marker;
+			}
+		}
+   }
 }
 
 // "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
