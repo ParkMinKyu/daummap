@@ -515,10 +515,13 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
+				marker.codeIdx = i;
+				marker.mapIdx = j;
 				// 마커에 클릭이벤트를 등록합니다
-				daum.maps.event.addListener(marker, 'click', function() {
+				daum.maps.event.addListener(markers[i][j], 'click', function() {
 					  // 마커 위에 인포윈도우를 표시합니다
-					 console.log(this);
+					 console.log(this.codeIdx);
+					 console.log(this.mapIdx);
 				});
 			}
 		}
