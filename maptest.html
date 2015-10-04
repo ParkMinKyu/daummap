@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/daummap/js/jui/js/base.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/core.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/ui/modal.js"></script>
+<script type="text/javascript" src="/daummap/js/jui/js/ui/button.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/uix/tree.js"></script>
 <script type="text/javascript" src="/daummap/js/jui/js/uix/window.js"></script>
 <script type="text/javascript"
@@ -34,7 +35,9 @@
 	<!-- Main panel -->
 	<div class="panel">
 		<div class="head">
-			<div class="left">수원 서부 경찰서 EM</div>
+			<div class="left">
+				<div id="mapCodeGroup" class="group"></div>
+			</div>
 			<div class="right" style="position: absolute; right: 3px; top: 0px;">
 				<a href="#" class="btn" onclick="hideMarkers();return false;">모든 Marker 삭제 <i class="icon-trashcan"></i></a>
 				<a href="#" class="btn" onclick="setMarkers(map);return false;">모든 Marker 배치 <i class="icon-refresh"></i></a>
@@ -42,10 +45,7 @@
 		</div>
 		<div class="body">
 			<div class="row">
-				<div class="col col-2" style="max-height: 630px; overflow: auto;">
-					<ul class="tree line-file"></ul>
-				</div>
-				<div class="col col-10">
+				<div class="col col-12">
 					<div id="container">
 						<div id="rvWrapper">
 							<div id="roadview" style="width: 100%; height: 100%;"></div>
@@ -90,34 +90,72 @@
 			<div id="cctvList"></div>
 		</div>
 	</div>
+	<!-- 시설 리스트 window -->
+	<div id="mapList" class="msgbox detail">
+		<div class="head">
+			<div class="left">
+				<span id="codeName"></span>
+			</div>
+			<a href="#" class="close"><i class="icon-exit"></i></a>
+		</div>
+		<div class="body">
+			<a class="btn mini focus" onclick="showAll(); return false;" value="all"> 모두 표시 <i class="icon-check"></i></a><br>
+			<div id="codeMapList">
+			</div>
+		</div>
+	</div>
 
-
-		<script id="tpl_node" type="text/template">
-    <li>
-        <div><i></i> <!= name !> </div>
-        <ul></ul>
-    </li>
-	</script>
+		
 <script type="text/javascript" src="/daummap/js/map.js"></script>
 <script type="text/javascript">
-jui.ready([ "uix.window" ], function(win) {
+var mapInfoList = [];
+	var mapCodeGroup;
+	getMapInfoList();
+	jui.ready([ "uix.window" ], function(win) {
 	    mapInfo = win("#mapInfo", {
-		width : 600,
-		height : 550,
-		modal : true
+			width : 600,
+			height : 550,
+			resize : false,
+			move : false
 	    });
 	});
-	jui.ready([ "uix.tree" ], function(tree) {
+	jui.ready([ "uix.window" ], function(win) {
+	    mapList = win("#mapList", {
+			width : 600,
+			height : 550,
+			left: 25,
+		    top: 100,
+			resize : false,
+			move : false
+	    });
+	});
+	function createMapList(mapList){
+		var html = '';
+	    for (var i = 0; i < mapList.length; i++) {
+			var map = mapList[i];
+		    html += '<a class="btn mini"> '+map.name+' <i class="icon-check"></i></a>';
+		}
+	    $('#codeMapList').html(html);
+	    jui.create('ui.button','#codeMapList',{
+			type:'radio',
+			event : {
+			    change : function(data) {
+	               	var code = mapInfoList[mapCodeGroup.index];
+	               	var map = code.mapList[data.index];
+	               	console.log(code);
+	               	console.log(map);
+	               	crateMarker(map.lat, map.lng, code.imgpath, false);
+			    }
+			}
+		});
+	}
+	/* jui.ready([ "uix.tree" ], function(tree) {
 	    office_tree = tree(".tree", {
 		root : {
 		    name : "시설정보"
 		},
 		event : {
 		    select : function(node) {
-			/* this.select(node.index);
-			alert("index(" + node.index + "), title("
-					+ node.data.title + ")"); */
-			this.select(node.index);
 			if (node.depth > 1) {
 			    $('#mapName').text(node.data.name);
 			    $('#mapAddr').text(node.data.addr);
@@ -131,7 +169,7 @@ jui.ready([ "uix.window" ], function(win) {
 				html += '<ul class="bannerList">';
 				for (var i = 0; i < cctvList.length; i++) {
 				    var cctv = cctvList[i];
-				    html += '<li><img src="/daummap' + cctv.imgpath + '" ></li>';
+				    html += '<li><img src="<c:url value='/'/>' + cctv.imgpath + '" ></li>';
 				}
 				html += '</ul>';
 				html += '</div>';
@@ -154,11 +192,11 @@ jui.ready([ "uix.window" ], function(win) {
 		    }
 		},
 		tpl : {
-		    node : $("#tpl_node").html()
+		    node : "<li><div><i></i> <!= name !></div><ul></ul></li>"
 		}
 	    });
 	   getMapInfoList();
-	});
+	}); */
 
 	function getMapInfoList() {
 	    $.ajax({
@@ -168,18 +206,30 @@ jui.ready([ "uix.window" ], function(win) {
 		    $('.wrap-loading').removeClass('display-none');
 		},
 		success : function(datas) {
-		    var mapInfoList = datas.mapInfoList;
+		    mapInfoList = datas.mapInfoList;
+		    var html = '';
 		    for (var i = 0; i < mapInfoList.length; i++) {
-			var mapCode = mapInfoList[i];
-			var mapList = mapCode.mapList;
-			office_tree.append(mapCode);
-			for (var j = 0; j < mapList.length; j++) {
-			    var map = mapList[j];
-			    office_tree.append(i, map);
-				crateMarker(map.lat, map.lng, mapCode.imgpath,true);
-			}
-			office_tree.fold(i);
+				var mapCode = mapInfoList[i];
+				html += '<a class="btn">' + mapCode.name + ' <i class="icon-check"></i></a>';
+				for (var j = 0; j < mapList.length; j++) {
+		        var map = mapList[j];
+		        
+		        crateMarker(map.lat, map.lng, code.imgpath, true);
 		    }
+				
+		    }
+		    $('#mapCodeGroup').html(html);
+		    /* for (var i = 0; i < mapInfoList.length; i++) {
+		    var mapCode = mapInfoList[i];
+		    var mapList = mapCode.mapList;
+		    office_tree.append(mapCode);
+		    for (var j = 0; j < mapList.length; j++) {
+		        var map = mapList[j];
+		        office_tree.append(i, map);
+		        //crateMarker(map.lat, map.lng, code.imgpath);
+		    }
+		    office_tree.fold(i);
+		    } */
 		},
 		error : function(r, e, o) {
 		    alert('mapCodeList.do 수행중 에러');
@@ -188,18 +238,21 @@ jui.ready([ "uix.window" ], function(win) {
 		    console.log(o);
 		},
 		complete : function() {
+		    mapCodeGroup = jui.create('ui.button', "#mapCodeGroup", {
+			type : "radio",
+			event : {
+			    change : function(data) {
+					var i = data.index;
+					mapCodeGroup.index = i;
+					$('#codeName').text(mapInfoList[i].name + ' 등록된 건물 총 '+mapInfoList[i].mapList.length+'개');
+					createMapList(mapInfoList[i].mapList);
+					mapList.show();
+			    }
+			}
+	    	});
 		    $('.wrap-loading').addClass('display-none');
 		}
 	    });
-	}
-	
-	function goOfficeMap(){
-		hideMarkers();
-		mapInfo.hide();
-		var mapCode = office_tree.get(office_tree.activeIndex()).parent.data;
-		var map = office_tree.get(office_tree.activeIndex()).data;
-		panTo(map.lat,map.lng);
-		crateMarker(map.lat, map.lng, mapCode.imgpath,false);
 	}
 </script>
 </body>
