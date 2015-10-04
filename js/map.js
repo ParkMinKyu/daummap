@@ -410,7 +410,8 @@ var markers = new Array();
 function showAll(){
 	hideMarkers();
 	var code = mapInfoList[mapCodeGroup.index];
-	var mapList = code.mapList;	               	
+	var mapList = code.mapList;	               
+	if(markers[mapCodeGroup.index] == null )markers[mapCodeGroup.index] = new Array();
 	for(var i = 0 ; i < mapList.length ; i ++){
 		if(markers[mapCodeGroup.index][i] == null || markers[mapCodeGroup.index][i].mf == null){
 			var mapInfo = mapList[i];
