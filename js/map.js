@@ -409,7 +409,7 @@ var markers = new Array();
 
 function crateMarker( lat, lng, imgpath) {
 	if(markers[mapCodeGroup.index] == null )markers[mapCodeGroup.index] = new Array();
-	if(markers[mapCodeGroup.index][codeMapList.index] == null){
+	if(markers[mapCodeGroup.index][codeMapList.index] == null || markers[mapCodeGroup.index][codeMapList.index].mf == null){
 		var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 		imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
 		imageOption = {
