@@ -541,7 +541,7 @@ function addMarkerEvent(){
 							html += '<ul class="bannerList">';
 							for (var i = 0; i < cctvList.length; i++) {
 								var cctv = cctvList[i];
-								html += '<li><img src="<c:url value='/'/>' + cctv.imgpath + '" ></li>';
+								html += '<li><img src="/daummap' + cctv.imgpath + '" ></li>';
 							}
 							html += '</ul>';
 							html += '</div>';
