@@ -438,6 +438,7 @@ function crateMarker( lat, lng, imgpath) {
 function setMarkers(map) {
     for (var i = 0; i < markers.length; i++) {
 		    for (var j = 0; j < markers.length; j++) {
+				if(markers[i][j] != null)
 		        markers[i][j].setMap(map);
 			}
     }            
