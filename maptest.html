@@ -110,7 +110,7 @@
 <script type="text/javascript">
 var mapInfoList = [];
 	getMapInfoList();
-	jui.ready([ "ui.button" ], function(win) {
+	jui.ready([ "ui.button" ], function(button) {
 	    mapCodeGroup = button("#mapCodeGroup", {
 		type : "radio",
 		event : {
@@ -124,7 +124,7 @@ var mapInfoList = [];
 		}
     	});
 	});
-	jui.ready([ "ui.button" ], function(win) {
+	jui.ready([ "ui.button" ], function(button) {
 	    codeMapList = button('#codeMapList',{
 			type:'radio',
 			event : {
