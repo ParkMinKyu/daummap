@@ -437,7 +437,9 @@ function crateMarker( lat, lng, imgpath) {
 // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 function setMarkers(map) {
     for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
+		    for (var j = 0; j < markers.length; j++) {
+		        markers[i][j].setMap(map);
+			}
     }            
 }
 
