@@ -434,6 +434,11 @@ function showAll(){
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
 			markers[mapCodeGroup.index][i] = marker;
+			// 마커에 클릭이벤트를 등록합니다
+				daum.maps.event.addListener(marker, 'click', function() {
+					  // 마커 위에 인포윈도우를 표시합니다
+					  alert();
+				});
 		}
 	}
 }
@@ -460,6 +465,11 @@ function crateMarker( lat, lng, imgpath) {
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
 		markers[mapCodeGroup.index][codeMapList.index] = marker;
+		// 마커에 클릭이벤트를 등록합니다
+				daum.maps.event.addListener(marker, 'click', function() {
+					  // 마커 위에 인포윈도우를 표시합니다
+					  alert();
+				});
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
 	}
@@ -505,6 +515,11 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
+				// 마커에 클릭이벤트를 등록합니다
+				daum.maps.event.addListener(marker, 'click', function() {
+					  // 마커 위에 인포윈도우를 표시합니다
+					  alert();
+				});
 			}
 		}
    }
