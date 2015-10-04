@@ -129,11 +129,10 @@ var mapInfoList = [];
 			type:'radio',
 			event : {
 			    change : function(data) {
+					codeMapList.index = data.index;
 	               	var code = mapInfoList[mapCodeGroup.index];
-	               	var map = code.mapList[data.index];
-	               	console.log(code);
-	               	console.log(map);
-	               	crateMarker(map, code.imgpath);
+	               	var map = code.mapList[data.index];	               	
+	               	crateMarker(map.lat, map.lng, code.imgpath);
 			    }
 			}
 		});
@@ -231,7 +230,7 @@ var mapInfoList = [];
 				for (var j = 0; j < mapList.length; j++) {
 		        var map = mapList[j];
 		        
-		        crateMarker(map, mapCode.imgpath);
+		        crateMarker(map.lat, map.lng, mapCode.imgpath);
 		    }
 				
 		    }
