@@ -407,7 +407,7 @@ function getTimeHTML(distance) {
 // 지도에 표시된 마커 객체를 가지고 있을 배열입니다
 var markers = [];
 
-function crateMarker(lat, lng, imgpath, isPush) {
+function crateMarker(mapInfo, imgpath) {
 	var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 	imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
 	imageOption = {
@@ -415,7 +415,7 @@ function crateMarker(lat, lng, imgpath, isPush) {
 	}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 	var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
-			imageOption), markerPosition = new daum.maps.LatLng(lat, lng); // 마커가
+			imageOption), markerPosition = new daum.maps.LatLng(mapInfo.lat, mapInfo.lng); // 마커가
 																			// 표시될
 																			// 위치입니다
 	// 마커를 생성합니다

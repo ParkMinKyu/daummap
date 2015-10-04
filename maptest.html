@@ -133,7 +133,7 @@ var mapInfoList = [];
 	               	var map = code.mapList[data.index];
 	               	console.log(code);
 	               	console.log(map);
-	               	crateMarker(map.lat, map.lng, code.imgpath, false);
+	               	crateMarker(map, code.imgpath);
 			    }
 			}
 		});
@@ -231,7 +231,7 @@ var mapInfoList = [];
 				for (var j = 0; j < mapList.length; j++) {
 		        var map = mapList[j];
 		        
-		        crateMarker(map.lat, map.lng, mapCode.imgpath, true);
+		        crateMarker(map, mapCode.imgpath);
 		    }
 				
 		    }
