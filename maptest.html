@@ -109,8 +109,35 @@
 <script type="text/javascript" src="/daummap/js/map.js"></script>
 <script type="text/javascript">
 var mapInfoList = [];
-	var mapCodeGroup;
 	getMapInfoList();
+	jui.ready([ "ui.button" ], function(win) {
+	    mapCodeGroup = button("#mapCodeGroup", {
+		type : "radio",
+		event : {
+		    change : function(data) {
+				var i = data.index;
+				mapCodeGroup.index = i;
+				$('#codeName').text(mapInfoList[i].name + ' 등록된 건물 총 '+mapInfoList[i].mapList.length+'개');
+				createMapList(mapInfoList[i].mapList);
+				mapList.show();
+		    }
+		}
+    	});
+	});
+	jui.ready([ "ui.button" ], function(win) {
+	    codeMapList = button('#codeMapList',{
+			type:'radio',
+			event : {
+			    change : function(data) {
+	               	var code = mapInfoList[mapCodeGroup.index];
+	               	var map = code.mapList[data.index];
+	               	console.log(code);
+	               	console.log(map);
+	               	//crateMarker(map.lat, map.lng, code.imgpath);
+			    }
+			}
+		});
+	});
 	jui.ready([ "uix.window" ], function(win) {
 	    mapInfo = win("#mapInfo", {
 			width : 600,
@@ -136,18 +163,7 @@ var mapInfoList = [];
 		    html += '<a class="btn mini"> '+map.name+' <i class="icon-check"></i></a>';
 		}
 	    $('#codeMapList').html(html);
-	    jui.create('ui.button','#codeMapList',{
-			type:'radio',
-			event : {
-			    change : function(data) {
-	               	var code = mapInfoList[mapCodeGroup.index];
-	               	var map = code.mapList[data.index];
-	               	console.log(code);
-	               	console.log(map);
-	               	crateMarker(map.lat, map.lng, code.imgpath, false);
-			    }
-			}
-		});
+	    codeMapList.reload();
 	}
 	/* jui.ready([ "uix.tree" ], function(tree) {
 	    office_tree = tree(".tree", {
@@ -238,18 +254,7 @@ var mapInfoList = [];
 		    console.log(o);
 		},
 		complete : function() {
-		    mapCodeGroup = jui.create('ui.button', "#mapCodeGroup", {
-			type : "radio",
-			event : {
-			    change : function(data) {
-					var i = data.index;
-					mapCodeGroup.index = i;
-					$('#codeName').text(mapInfoList[i].name + ' 등록된 건물 총 '+mapInfoList[i].mapList.length+'개');
-					createMapList(mapInfoList[i].mapList);
-					mapList.show();
-			    }
-			}
-	    	});
+		     mapCodeGroup.reload();
 		    $('.wrap-loading').addClass('display-none');
 		}
 	    });
