@@ -133,7 +133,7 @@ var mapInfoList = [];
 	               	var map = code.mapList[data.index];
 	               	console.log(code);
 	               	console.log(map);
-	               	//crateMarker(map.lat, map.lng, code.imgpath);
+	               	crateMarker(map.lat, map.lng, code.imgpath, false);
 			    }
 			}
 		});
@@ -226,6 +226,7 @@ var mapInfoList = [];
 		    var html = '';
 		    for (var i = 0; i < mapInfoList.length; i++) {
 				var mapCode = mapInfoList[i];
+				var mapList = mapCode.mapList;
 				html += '<a class="btn" onclick="mapCodeGroup.setIndex('+i+'); return false;">' + mapCode.name + ' <i class="icon-check"></i></a>';
 				for (var j = 0; j < mapList.length; j++) {
 		        var map = mapList[j];
