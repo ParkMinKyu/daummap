@@ -527,7 +527,8 @@ function addMarkerEvent(){
 						  // 마커 위에 인포윈도우를 표시합니다
 						 console.log(this.codeIdx);
 						 console.log(this.mapIdx);
-						 var mapInfo = mapInfoList[this.codeIdx][this.mapIdx];
+						 var codeInfo = mapInfoList[this.codeIdx];
+						 var mapInfo = codeInfo.mapList[this.mapIdx];
 						  $('#mapName').text(mapInfo.name);
 							$('#mapAddr').text(mapInfo.addr);
 							$('#mapPhon').text(mapInfo.phon);
