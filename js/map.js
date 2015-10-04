@@ -435,10 +435,7 @@ function showAll(){
 			marker.setMap(map);
 			markers[mapCodeGroup.index][i] = marker;
 			// 마커에 클릭이벤트를 등록합니다
-				daum.maps.event.addListener(marker, 'click', function() {
-					  // 마커 위에 인포윈도우를 표시합니다
-					 console.log(this);
-				});
+			addMarkerEvent();
 		}
 	}
 }
@@ -466,10 +463,7 @@ function crateMarker( lat, lng, imgpath) {
 		marker.setMap(map);
 		markers[mapCodeGroup.index][codeMapList.index] = marker;
 		// 마커에 클릭이벤트를 등록합니다
-				daum.maps.event.addListener(marker, 'click', function() {
-					  // 마커 위에 인포윈도우를 표시합니다
-					  console.log(this);
-				});
+		addMarkerEvent();
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
 	}
@@ -515,6 +509,7 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
+				addMarkerEvent();
 			}
 		}
    }
@@ -528,10 +523,42 @@ function addMarkerEvent(){
 					markers[i][j].codeIdx = i;
 					markers[i][j].mapIdx = j;
 					// 마커에 클릭이벤트를 등록합니다
-					daum.maps.event.addListener(markers[i][j], 'click', function() {
+					daum.maps.event.addListener(markers[i][j], 'mouseover', function() {
 						  // 마커 위에 인포윈도우를 표시합니다
 						 console.log(this.codeIdx);
 						 console.log(this.mapIdx);
+						 var mapInfo = mapInfoList[this.codeIdx][this.mapIdx];
+						  $('#mapName').text(mapInfo.name);
+							$('#mapAddr').text(mapInfo.addr);
+							$('#mapPhon').text(mapInfo.phon);
+							$('#cctvList').html('');
+							var cctvList = mapInfo.cctvList;
+							if (cctvList.length > 0) {
+							var html = '<div id="siteWpr">';
+							html += '<div class="simpleBanner">';
+							html += '<div class="bannerListWpr">';
+							html += '<ul class="bannerList">';
+							for (var i = 0; i < cctvList.length; i++) {
+								var cctv = cctvList[i];
+								html += '<li><img src="<c:url value='/'/>' + cctv.imgpath + '" ></li>';
+							}
+							html += '</ul>';
+							html += '</div>';
+							html += '<div class="bannerControlsWpr bannerControlsPrev"><div class="bannerControls"></div></div>';
+							html += '<div class="bannerIndicators"><ul></ul></div>';
+							html += '<div class="bannerControlsWpr bannerControlsNext"><div class="bannerControls"></div></div>';
+							html += '</div>';
+							html += '</div>';
+							$('#cctvList').html(html);
+							$('.simpleBanner').simplebanner({
+								autoRotate : false
+							});
+							$('#cctvList').show();
+							} else {
+							$('#mapCctv').text("CCTV 정보 없음.");
+							$('#cctvList').hide();
+							}
+							mapInfo.show();
 					});
 				}
 			}
