@@ -515,17 +515,27 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
-				marker.codeIdx = i;
-				marker.mapIdx = j;
-				// 마커에 클릭이벤트를 등록합니다
-				daum.maps.event.addListener(markers[i][j], 'click', function() {
-					  // 마커 위에 인포윈도우를 표시합니다
-					 console.log(this.codeIdx);
-					 console.log(this.mapIdx);
-				});
 			}
 		}
    }
+}
+
+function addMarkerEvent(){
+	for (var i = 0; i < markers.length; i++) {
+			if(markers[i] == null )markers[i] = new Array();
+		    for (var j = 0; j < markers[i].length; j++) {
+				if(markers[i][j] != null ){
+					markers[i][j].codeIdx = i;
+					markers[i][j].mapIdx = j;
+					// 마커에 클릭이벤트를 등록합니다
+					daum.maps.event.addListener(markers[i][j], 'click', function() {
+						  // 마커 위에 인포윈도우를 표시합니다
+						 console.log(this.codeIdx);
+						 console.log(this.mapIdx);
+					});
+				}
+			}
+    }    
 }
 
 // "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
