@@ -437,7 +437,7 @@ function showAll(){
 			// 마커에 클릭이벤트를 등록합니다
 				daum.maps.event.addListener(marker, 'click', function() {
 					  // 마커 위에 인포윈도우를 표시합니다
-					  alert();
+					 console.log(this);
 				});
 		}
 	}
@@ -468,7 +468,7 @@ function crateMarker( lat, lng, imgpath) {
 		// 마커에 클릭이벤트를 등록합니다
 				daum.maps.event.addListener(marker, 'click', function() {
 					  // 마커 위에 인포윈도우를 표시합니다
-					  alert();
+					  console.log(this);
 				});
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
@@ -518,7 +518,7 @@ function showMarkers() {
 				// 마커에 클릭이벤트를 등록합니다
 				daum.maps.event.addListener(marker, 'click', function() {
 					  // 마커 위에 인포윈도우를 표시합니다
-					  alert();
+					 console.log(this);
 				});
 			}
 		}
