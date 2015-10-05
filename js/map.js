@@ -516,7 +516,7 @@ function showMarkers() {
 				marker.setMap(map);
 				markers[i][j] = marker;
 				addMarkerEvent();
-				markers[i][j].infowindow..open(map, markers[i][j]);
+				markers[i][j].infowindow.open(map, markers[i][j]);
 			}
 		}
    }
