@@ -554,6 +554,7 @@ function addMarkerEvent(){
 							$('.simpleBanner').simplebanner({
 								autoRotate : false
 							});
+							$('#mapCctv').text("");
 							$('#cctvList').show();
 							} else {
 							$('#mapCctv').text("CCTV 정보 없음.");
