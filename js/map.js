@@ -517,7 +517,6 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
-				addMarkerEvent();
 				markers[i][j].infowindow.open(map, markers[i][j]);
 			}else if(markers[i][j].mf == null){
 				markers[i][j].setMap(map);
@@ -525,6 +524,7 @@ function showMarkers() {
 			}
 		}
    }
+   addMarkerEvent();
 }
 
 function addMarkerEvent(){
