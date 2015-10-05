@@ -517,19 +517,18 @@ function showMarkers() {
 				// 마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
 				markers[i][j] = marker;
-				markers[i][j].infowindow.open(map, markers[i][j]);
 			}else if(markers[i][j].mf == null){
 				markers[i][j].setMap(map);
 				markers[i][j].infowindow.open(map, markers[i][j]);
 			}
 		}
    }
-   addMarkerEvent();
+   addMarkerEvent(marker);
 }
 
 function addMarkerEvent(){
 	for (var i = 0; i < markers.length; i++) {
-			if(markers[i] == null )markers[i] = new Array();
+		if(markers[i] == null )markers[i] = new Array();
 		    for (var j = 0; j < markers[i].length; j++) {
 				if(markers[i][j] != null ){
 					markers[i][j].codeIdx = i;
@@ -543,7 +542,7 @@ function addMarkerEvent(){
 						});
 						markers[i][j].infowindow = infowindow;
 					}
-					
+					markers[i][j].infowindow.open(map, markers[i][j]);
 					
 					// 마커에 클릭이벤트를 등록합니다
 					daum.maps.event.addListener(markers[i][j], 'click', function() {
