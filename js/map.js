@@ -413,7 +413,7 @@ function showAll(){
 	var mapList = code.mapList;	               
 	if(markers[mapCodeGroup.index] == null )markers[mapCodeGroup.index] = new Array();
 	for(var i = 0 ; i < mapList.length ; i ++){
-		if(markers[mapCodeGroup.index][i] == null || markers[mapCodeGroup.index][i].mf == null){
+		if(markers[mapCodeGroup.index][i] == null){
 			var mapInfo = mapList[i];
 			var imageSrc = '/daummap'+code.imgpath, // 마커이미지의 주소입니다
 			imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
@@ -437,13 +437,15 @@ function showAll(){
 			// 마커에 클릭이벤트를 등록합니다
 			addMarkerEvent();
 			markers[mapCodeGroup.index][i].infowindow.open(map, markers[mapCodeGroup.index][i]);
+		}else if(markers[mapCodeGroup.index][i].mf == null){
+			markers[mapCodeGroup.index][i].setMap(map);
 		}
 	}
 }
 
 function crateMarker( lat, lng, imgpath) {
 	if(markers[mapCodeGroup.index] == null )markers[mapCodeGroup.index] = new Array();
-	if(markers[mapCodeGroup.index][codeMapList.index] == null || markers[mapCodeGroup.index][codeMapList.index].mf == null){
+	if(markers[mapCodeGroup.index][codeMapList.index] == null){
 		var imageSrc = '/daummap'+imgpath, // 마커이미지의 주소입니다
 		imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
 		imageOption = {
@@ -466,6 +468,8 @@ function crateMarker( lat, lng, imgpath) {
 		// 마커에 클릭이벤트를 등록합니다
 		addMarkerEvent();
 		markers[mapCodeGroup.index][codeMapList.index].infowindow.open(map, markers[mapCodeGroup.index][codeMapList.index]);
+	}else if(markers[mapCodeGroup.index][codeMapList.index].mf == null){
+		markers[mapCodeGroup.index][codeMapList.index].setMap(map);
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
 		markers[mapCodeGroup.index][codeMapList.index].infowindow.close();
@@ -494,7 +498,7 @@ function showMarkers() {
 	   var mapList = code.mapList;	               
 	   	if(markers[i] == null )markers[i] = new Array();
 		for(var j = 0 ; j < mapList.length ; j ++){
-			if(markers[i][j] == null || markers[i][j].mf == null){
+			if(markers[i][j] == null){
 				var mapInfo = mapList[j];
 				var imageSrc = '/daummap'+code.imgpath, // 마커이미지의 주소입니다
 				imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
@@ -517,6 +521,8 @@ function showMarkers() {
 				markers[i][j] = marker;
 				addMarkerEvent();
 				markers[i][j].infowindow.open(map, markers[i][j]);
+			}else if(markers[i][j].mf == null){
+				markers[i][j].setMap(map);
 			}
 		}
    }
