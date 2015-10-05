@@ -1,3 +1,4 @@
+var isEvent = false;
 var overlayOn = false, // 지도 위에 로드뷰 오버레이가 추가된 상태를 가지고 있을 변수
 container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
 mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
@@ -523,7 +524,10 @@ function showMarkers() {
 			}
 		}
    }
-   addMarkerEvent(marker);
+   if(!isEvent){
+   	addMarkerEvent();	
+   	isEvent = true;
+   }
 }
 
 function addMarkerEvent(){
