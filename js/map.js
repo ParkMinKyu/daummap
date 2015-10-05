@@ -468,7 +468,7 @@ function crateMarker( lat, lng, imgpath) {
 		markers[mapCodeGroup.index][codeMapList.index].infowindow.open(map, markers[mapCodeGroup.index][codeMapList.index]);
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
-		markers[mapCodeGroup.index][codeMapList.index].infowindow.close;
+		markers[mapCodeGroup.index][codeMapList.index].infowindow.close();
 	}
 }
 
@@ -480,7 +480,7 @@ function setMarkers(map) {
 				if(markers[i][j] != null)
 		        markers[i][j].setMap(map);
 		        if(map == null){
-		        	markers[i][j].infowindow.close;
+		        	markers[i][j].infowindow.close();
 		        }
 			}
     }            
