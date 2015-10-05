@@ -480,7 +480,7 @@ function setMarkers(map) {
 		    for (var j = 0; j < markers[i].length; j++) {
 				if(markers[i][j] != null)
 		        markers[i][j].setMap(map);
-		        if(map == null){
+		        if(map == null && markers[i][j].infowindow != null){
 		        	markers[i][j].infowindow.close();
 		        }
 			}
