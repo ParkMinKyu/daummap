@@ -434,9 +434,9 @@ function showAll(){
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
 			markers[mapCodeGroup.index][i] = marker;
-			
 			markers[mapCodeGroup.index][i].infowindow.open(map, markers[mapCodeGroup.index][i]);
 		}else if(markers[mapCodeGroup.index][i].mf == null){
+			markers[mapCodeGroup.index][i].infowindow.open(map, markers[mapCodeGroup.index][i]);
 			markers[mapCodeGroup.index][i].setMap(map);
 		}
 	}
@@ -466,6 +466,7 @@ function crateMarker( lat, lng, imgpath) {
 		markers[mapCodeGroup.index][codeMapList.index] = marker;
 		markers[mapCodeGroup.index][codeMapList.index].infowindow.open(map, markers[mapCodeGroup.index][codeMapList.index]);
 	}else if(markers[mapCodeGroup.index][codeMapList.index].mf == null){
+		markers[mapCodeGroup.index][codeMapList.index].infowindow.open(map, markers[mapCodeGroup.index][codeMapList.index]);
 		markers[mapCodeGroup.index][codeMapList.index].setMap(map);
 	}else{
 		markers[mapCodeGroup.index][codeMapList.index].setMap(null)
@@ -520,6 +521,7 @@ function showMarkers() {
 				markers[i][j].infowindow.open(map, markers[i][j]);
 			}else if(markers[i][j].mf == null){
 				markers[i][j].setMap(map);
+				markers[i][j].infowindow.open(map, markers[i][j]);
 			}
 		}
    }
