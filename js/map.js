@@ -434,8 +434,7 @@ function showAll(){
 			// 마커가 지도 위에 표시되도록 설정합니다
 			marker.setMap(map);
 			markers[mapCodeGroup.index][i] = marker;
-			// 마커에 클릭이벤트를 등록합니다
-			addMarkerEvent();
+			
 			markers[mapCodeGroup.index][i].infowindow.open(map, markers[mapCodeGroup.index][i]);
 		}else if(markers[mapCodeGroup.index][i].mf == null){
 			markers[mapCodeGroup.index][i].setMap(map);
@@ -465,8 +464,6 @@ function crateMarker( lat, lng, imgpath) {
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
 		markers[mapCodeGroup.index][codeMapList.index] = marker;
-		// 마커에 클릭이벤트를 등록합니다
-		addMarkerEvent();
 		markers[mapCodeGroup.index][codeMapList.index].infowindow.open(map, markers[mapCodeGroup.index][codeMapList.index]);
 	}else if(markers[mapCodeGroup.index][codeMapList.index].mf == null){
 		markers[mapCodeGroup.index][codeMapList.index].setMap(map);
