@@ -230,12 +230,6 @@ var mapInfoList = [];
 				var mapCode = mapInfoList[i];
 				var mapList = mapCode.mapList;
 				html += '<a class="btn" onclick="mapCodeGroup.setIndex('+i+'); return false;">' + mapCode.name + ' <i class="icon-check"></i></a>';
-				for (var j = 0; j < mapList.length; j++) {
-		        var map = mapList[j];
-		        
-		        crateMarker(map.lat, map.lng, mapCode.imgpath);
-		    }
-				
 		    }
 		    $('#mapCodeGroup').html(html);
 		    /* for (var i = 0; i < mapInfoList.length; i++) {
