@@ -523,7 +523,7 @@ function addMarkerEvent(){
 					markers[i][j].codeIdx = i;
 					markers[i][j].mapIdx = j;
 					// 마커에 클릭이벤트를 등록합니다
-					daum.maps.event.addListener(markers[i][j], 'mouseover', function() {
+					daum.maps.event.addListener(markers[i][j], 'click', function() {
 						  // 마커 위에 인포윈도우를 표시합니다
 						 console.log(this.codeIdx);
 						 console.log(this.mapIdx);
