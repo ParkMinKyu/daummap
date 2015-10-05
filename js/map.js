@@ -535,7 +535,7 @@ function addMarkerEvent(){
 					var infowindow = new daum.maps.InfoWindow({
 					    content : '<div style="padding:5px;">'+mapInfo.name+'</div>' // 인포윈도우에 표시할 내용
 					});
-					markers[i][j].infowindow = infowindow;
+					markers[i][j].infowindow == null ? infowindow : markers[i][j].infowindow;
 					
 					
 					// 마커에 클릭이벤트를 등록합니다
