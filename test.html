@@ -32,10 +32,28 @@ $('#testBtn').on('click',function(){
 			}
 		});
 	});
+	
+	$('#selectBtn').on('click',function(){
+		$.ajax({
+			url: "http://localhost:10000/mdt/scheduler",
+			type : 'get',
+			dataType: 'json',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify({starttime : new Date().getTime(),endtime : new Date().getTime() + (1000*60*60*30)}),
+			success: function(response) {
+				console.log(response);
+			},
+			error : function(response, txt){
+				console.log(response);
+				console.log(txt);
+			}
+		});
+	});
 });
 </script>
 </head>
 <body>
-<button id="testBtn">test</button>
+<button id="selectBtn">selecttest</button>
+<button id="testBtn">inserttest</button>
 </body>
 </html>
