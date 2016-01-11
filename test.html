@@ -39,7 +39,7 @@ $('#testBtn').on('click',function(){
 			url: "http://localhost:10000/mdt/scheduler",
 			type : 'get',
 			contentType: "application/x-www-form-urlencoded; charset=utf-8",
-			data: {starttime : new Date().getTime(),endtime : new Date().getTime() + (1000*60*60*30)},
+			data: {starttime : new Date().getTime() - (1000*60*60*24*30),endtime : new Date().getTime() + (1000*60*60*24*30)},
 			success: function(response) {
 				console.log(response);
 			},
