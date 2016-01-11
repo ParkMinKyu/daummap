@@ -21,7 +21,7 @@ $('#testBtn').on('click',function(){
 			url: "http://localhost:10000/mdt/scheduler",
 			type : type,
 			dataType: 'json',
-			contentType: "application/json; charset=utf-8",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			data: JSON.stringify(scheduler),
 			success: function(response) {
 				console.log(response);
