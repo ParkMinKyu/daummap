@@ -21,7 +21,7 @@ $('#testBtn').on('click',function(){
 			url: "http://localhost:10000/mdt/scheduler",
 			type : type,
 			dataType: 'json',
-			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(scheduler),
 			success: function(response) {
 				console.log(response);
@@ -38,7 +38,7 @@ $('#testBtn').on('click',function(){
 			url: "http://localhost:10000/mdt/scheduler",
 			type : 'get',
 			dataType: 'json',
-			contentType: "application/json; charset=utf-8",
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
 			data: JSON.stringify({starttime : new Date().getTime(),endtime : new Date().getTime() + (1000*60*60*30)}),
 			success: function(response) {
 				console.log(response);
