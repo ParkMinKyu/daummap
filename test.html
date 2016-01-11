@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/daummap/js/jquery-1.11.3.min.js"></script>
+<script>
+var scheduler = {};
+$(function(){
+$('#testBtn').on('click',function(){
+		var type = 'post';		
+		scheduler.title = 'test';
+		scheduler.contents = 'tescccc';
+		scheduler.writer = 'parkmk';
+		scheduler.allDay = true;
+		scheduler.starttime = new Date();
+		scheduler.endtime = new Date();
+		if(scheduler.id > 0 ){
+			type = "put";
+		}
+		$.ajax({
+			url: "http://localhost:10000/mdt/scheduler",
+			type : type,
+			dataType: 'json',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(scheduler),
+			success: function(response) {
+				console.log(response);
+			},
+			error : function(response, txt){
+				console.log(response);
+				console.log(txt);
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+<button id="testBtn">test</button>
+</body>
+</html>
